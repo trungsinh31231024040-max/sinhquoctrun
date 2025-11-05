@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Bài tập CSS 2</title>
+  <style>
+    /* trạng thái bình thường */
+    .khoa {
+      display: inline-block;
+      background: blue;          /* xanh */
+      color: #fff;
+      font-size: 20px;           /* 20px */
+      padding: 10px 20px;
+      transform: matrix(1,0,0,1,0,0);   /* matrix(1,0,0,1,0,0) = không biến đổi */
+      transition: 0.4s ease;     /* để nó chuyển mượt */
+      cursor: pointer;
+    }
+
+    /* khi hover */
+    .khoa:hover {
+      background: red;                 /* sang đỏ */
+      font-size: 50px;                 /* sang 50px */
+      transform: matrix(1.4, -0.54, 0.54, 1.4, 0, 0);
+      /* đúng theo đề: matrix(1.4,-0.54,0.54,1.4,0,0) */
+    }
+  </style>
+</head>
+<body>
+
+  <span class="khoa">Khoa CNTTKD</span>
+
+</body>
+</html>

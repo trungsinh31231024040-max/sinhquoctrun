@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Original Hover Effects – Elite Hover for All</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=PT+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+/* ---------- Reset ---------- */
+*{box-sizing:border-box;margin:0;padding:0}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{text-decoration:none}
+
+/* ---------- Page shell ---------- */
+body{
+  color:#222;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+  background:#efe9dd url("images/white_texture.jpg") repeat fixed;
+}
+.header{max-width:980px;margin:28px auto 10px;padding:0 16px;text-align:center}
+.title{font:700 44px/1.15 "Oswald",Arial,sans-serif}
+.subtitle{margin-top:6px;color:#8a6b20;font:italic 16px/1.2 "PT Serif",Georgia,serif}
+.tabs{display:flex;gap:8px;justify-content:center;margin:18px 0 24px;flex-wrap:wrap}
+.tab{font:600 12px/1 "Oswald",Arial,sans-serif;padding:10px 12px;border-radius:999px;border:1px solid #ccc8bc;background:#fff;color:#000}
+.tab.is-active{background:#e0c36f;border-color:#d1b757}
+.container{max-width:980px;margin:0 auto;padding:0 16px 64px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+@media (max-width:900px){.grid{grid-template-columns:1fr}}
+.frame{background:#fff;border-radius:10px;padding:10px;box-shadow:0 10px 25px rgba(0,0,0,.12),0 3px 8px rgba(0,0,0,.08)}
+
+/* ---------- ELITE HOVER (áp cho tất cả .view) ---------- */
+.view{
+  --accent: #7c3aed;             /* tím */
+  --accent2:#22d3ee;             /* xanh cyan */
+  --glass: rgba(20,24,30,.28);   /* overlay glass */
+  --radius: 12px;
+
+  position:relative; overflow:hidden; border-radius: var(--radius);
+  aspect-ratio: 4/3; background:#0b0b0c; isolation:isolate;
+  transform-style: preserve-3d;
+}
+
+/* Base image transform */
+.view img{
+  position:absolute; inset:0;
+  transform: scale(1) rotateZ(0) rotateX(0);
+  transform-origin: 50% 40%;
+  transition: transform 800ms cubic-bezier(.22,.61,.36,1),
+              filter 500ms ease;
+  filter: saturate(.95) contrast(.95);
+}
+.view:hover img{
+  transform: scale(1.12) rotateZ(2.2deg) rotateX(6deg);
+  filter: saturate(1.1) contrast(1);
+}
+
+/* Glass overlay + clip reveal for content */
+.view .content{
+  position:absolute; inset:0; display:flex; flex-direction:column;
+  align-items:center; justify-content:flex-end; gap:8px; padding-bottom:18px;
+  backdrop-filter: blur(2.5px);
+  background: linear-gradient(180deg, transparent 55%, var(--glass));
+  clip-path: inset(0 0 100% 0);               /* ẩn từ dưới lên */
+  transition: clip-path 700ms cubic-bezier(.22,.61,.36,1);
+}
+.view:hover .content{ clip-path: inset(0 0 0 0); }
+
+.view h2{
+  width:100%; margin-top:20px; padding:12px 10px;
+  background:rgba(0,0,0,.78); color:#fff; text-transform:uppercase;
+  letter-spacing:.6px; font:700 16px/1 "Oswald",Arial,sans-serif;
+  border-radius:8px;
+  transform: translateZ(30px);
+}
+.view p{
+  max-width:460px; color:#fff; text-align:center;
+  font:italic 14px/1.35 "PT Serif",Georgia,serif;
+  transform: translateZ(30px);
+}
+.view a.info{
+  display:inline-block; margin-top:6px; color:#0b0b0c; background:#fff;
+  padding:10px 16px; border-radius:8px; font:700 12px/1 "Oswald",Arial,sans-serif;
+  text-transform:uppercase; letter-spacing:.4px; position:relative;
+  transform: translateZ(30px);
+}
+.view a.info::after{
+  content:""; position:absolute; left:10px; right:10px; bottom:8px; height:2px;
+  background: linear-gradient(90deg,var(--accent),var(--accent2));
+  transform: scaleX(0); transform-origin:left; transition: transform .45s ease;
+}
+.view:hover a.info::after{ transform: scaleX(1); }
+
+/* Rotating conic-gradient border (neon) */
+.view::before{
+  content:""; position:absolute; inset:-2px; border-radius:calc(var(--radius) + 2px);
+  background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent));
+  filter: blur(6px); opacity:.0; pointer-events:none; transform: translateZ(0);
+  animation: spin 2.4s linear infinite;
+}
+.view::after{
+  /* mask để viền rỗng bên trong */
+  content:""; position:absolute; inset:0; border-radius:var(--radius); padding:2px;
+  background: conic-gradient(from 0deg, var(--accent), var(--accent2), var(--accent));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  opacity:.0; transition:opacity .35s ease;
+}
+.view:hover::before{ opacity:.25; }
+.view:hover::after{ opacity:1; }
+@keyframes spin{ to{ transform: rotate(360deg); } }
+
+/* Diagonal sheen sweep (mỗi lần hover) */
+.view .shine{
+  position:absolute; top:-25%; left:-45%; width:28%; height:150%;
+  background: linear-gradient(120deg, rgba(255,255,255,.7) 0%, rgba(255,255,255,.18) 60%, rgba(255,255,255,0) 100%);
+  transform: skewX(-20deg) translateX(-10%);
+  filter: blur(.6px); pointer-events:none; opacity:0;
+}
+.view:hover .shine{
+  animation: sheen 1.1s ease-out both;
+}
+@keyframes sheen{
+  0%{ transform: skewX(-20deg) translateX(-10%); opacity:0 }
+  15%{ opacity:1 }
+  100%{ transform: skewX(-20deg) translateX(330%); opacity:0 }
+}
+
+/* Text subtle rise on enter */
+.view h2, .view p, .view a.info{
+  opacity:.0; transform: translateY(10px) translateZ(30px);
+  transition: opacity .6s ease, transform .6s cubic-bezier(.22,.61,.36,1);
+}
+.view:hover h2{ opacity:1; transform: translateY(0) translateZ(30px); transition-delay:.12s }
+.view:hover p{  opacity:1; transform: translateY(0) translateZ(30px); transition-delay:.20s }
+.view:hover a.info{ opacity:1; transform: translateY(0) translateZ(30px); transition-delay:.28s }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <h1 class="title">Original Hover Effects</h1>
+  <p class="subtitle">with CSS3 Transitions and Animations</p>
+  <nav class="tabs">
+    <span class="tab is-active">DEMO 1</span>
+    <span class="tab">DEMO 2</span><span class="tab">DEMO 3</span>
+    <span class="tab">DEMO 4</span><span class="tab">DEMO 5</span>
+    <span class="tab">DEMO 6</span><span class="tab">DEMO 7</span>
+    <span class="tab">DEMO 8</span><span class="tab">DEMO 9</span><span class="tab">DEMO 10</span>
+  </nav>
+</header>
+
+<main class="container">
+  <section class="grid">
+    <!-- Ảnh 1 -->
+    <div class="frame">
+      <div class="view">
+        <img src="images/1.jpg" alt="Ảnh 1">
+        <span class="shine" aria-hidden="true"></span>
+        <div class="content">
+          <h2>Elite Hover</h2>
+          <p>Neon border • Glass overlay • Diagonal sheen • 3D tilt + zoom • Clip reveal text.</p>
+          <a class="info" href="#">Read more</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ảnh 2 -->
+    <div class="frame">
+      <div class="view">
+        <img src="images/2.jpg" alt="Ảnh 2">
+        <span class="shine" aria-hidden="true"></span>
+        <div class="content">
+          <h2>Elite Hover</h2>
+          <p>Everything is pure CSS, no JS required.</p>
+          <a class="info" href="#">Read more</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ảnh 3 -->
+    <div class="frame">
+      <div class="view">
+        <img src="images/3.jpg" alt="Ảnh 3">
+        <span class="shine" aria-hidden="true"></span>
+        <div class="content">
+          <h2>Elite Hover</h2>
+          <p>Smooth easing and layered depth for a premium feel.</p>
+          <a class="info" href="#">Read more</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ảnh 4 -->
+    <div class="frame">
+      <div class="view">
+        <img src="images/4.jpg" alt="Ảnh 4">
+        <span class="shine" aria-hidden="true"></span>
+        <div class="content">
+          <h2>Elite Hover</h2>
+          <p>Applied consistently across the entire gallery.</p>
+          <a class="info" href="#">Read more</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

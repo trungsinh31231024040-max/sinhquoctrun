@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tuan 4 – Ve Nha | Mục lục bài tập</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#efe9dd;
+  --paper:#ffffff;
+  --ink:#222;
+  --muted:#6b7280;
+  --brand:#e0c36f;
+  --ring:#d1b757;
+  --accent:#7c3aed;
+  --accent2:#22d3ee;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  color:var(--ink);
+  font-family:"Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: var(--bg) url("images/white_texture.jpg") repeat fixed;
+}
+
+/* ===== Hero ===== */
+.container{max-width:1100px;margin:0 auto;padding:20px 18px 64px}
+.hero{
+  display:grid;grid-template-columns:120px 1fr;gap:18px;
+  align-items:center;max-width:1100px;margin:34px auto 10px;
+}
+@media (max-width:640px){ .hero{grid-template-columns:1fr;text-align:center} }
+.avatar{
+  width:120px;height:120px;border-radius:50%;overflow:hidden;border:4px solid #fff;
+  box-shadow:0 10px 24px rgba(0,0,0,.12),0 4px 8px rgba(0,0,0,.08);
+}
+.hero h1{
+  font-family:"Oswald",Arial,sans-serif;font-weight:700;font-size:38px;line-height:1.15;
+  letter-spacing:.4px;margin-bottom:4px;
+}
+.hero p{color:#8a6b20;font-style:italic}
+.social{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap}
+.social a{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1px solid #e8e1cf;border-radius:999px;padding:8px 12px;
+  color:#111;font-weight:600;text-decoration:none;
+  transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.social a:hover{transform:translateY(-2px);border-color:var(--ring);box-shadow:0 8px 18px rgba(0,0,0,.12)}
+
+/* ===== Cards ===== */
+.section-title{
+  font-family:"Oswald",Arial,sans-serif;font-size:28px;margin:26px 0 14px;letter-spacing:.3px
+}
+.grid{
+  display:grid;gap:22px;grid-template-columns: repeat( auto-fit, minmax(240px, 1fr) );
+}
+.card{
+  position:relative;background:var(--paper);border-radius:14px;padding:18px;
+  border:1px solid #ece6d8;overflow:hidden;transform-style:preserve-3d;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.card:hover{transform:translateY(-4px) rotateX(2deg);box-shadow:0 16px 36px rgba(0,0,0,.16),0 6px 14px rgba(0,0,0,.1)}
+/* Neon conic border */
+.card::before{
+  content:"";position:absolute;inset:-2px;border-radius:16px;filter:blur(6px);opacity:0;
+  background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent));
+  pointer-events:none;animation:spin 2.8s linear infinite;
+}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:14px;padding:2px;opacity:0;
+  background:conic-gradient(from 0deg,var(--accent),var(--accent2),var(--accent));
+  -webkit-mask:linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;transition:opacity .35s ease
+}
+.card:hover::before{opacity:.22}.card:hover::after{opacity:1}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.badge{display:inline-block;font:600 11px/1 "Oswald",Arial,sans-serif;letter-spacing:.5px;padding:7px 10px;border-radius:999px;background:var(--brand);color:#111;border:1px solid var(--ring)}
+.title{font-weight:700;margin:12px 0 6px;font-size:18px}
+.desc{color:var(--muted);font-size:14px;line-height:1.45;min-height:44px}
+.actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+a.btn{
+  text-decoration:none;color:#111;background:#fff;border:1px solid #e6e0cf;
+  padding:10px 14px;border-radius:10px;font-weight:600;font-size:14px;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+a.btn:hover{background:#f7f3ea;border-color:var(--ring);transform:translateY(-2px)}
+
+footer{max-width:1100px;margin:26px auto 36px;padding:0 18px;color:#777;font-size:13px;text-align:center}
+small{color:#999}
+
+.card::before,
+.card::after{
+  pointer-events: none;   /* rất quan trọng */
+}
+
+/* đảm bảo vùng nút nằm trên cùng */
+.actions, .actions .btn{
+  position: relative;
+  z-index: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- HERO -->
+  <section class="hero">
+    <img class="avatar" src="https://beatpet.com/wp-content/uploads/2023/03/anh-con-cho-bi-ong-dot-2.jpg" alt="Ảnh đại diện">
+    <div>
+      <h1>SINH QUỐC TRUNG</h1>
+      <p>UEH – Khoa CNTT Kinh doanh | Tuan 4 – Bài tập về nhà (CSS Hover Effects)</p>
+      <div class="social">
+        <a href="hhttps://github.com/trungsinh31231024040-max/sinhquoc-trun" target="_blank"><i class="fa-brands fa-github"></i> GitHub</a>
+        <a href="https://www.facebook.com/quoc.trung.195873" target="_blank"><i class="fa-brands fa-facebook"></i> Facebook</a>
+        <a href="mailto:you@example.com"><i class="fa-solid fa-envelope"></i> sinhquoctrung@gmail.com</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIST BÀI TẬP -->
+  <h2 class="section-title">Danh sách bài tập</h2>
+  <section class="grid">
+    <article class="card">
+      <span class="badge">Bài 1</span>
+      <div class="title">Hover cơ bản (màu/size/transform)</div>
+      <p class="desc">Yêu cầu 1: đổi nền xanh → đỏ, font-size 20→50px, transform matrix.</p>
+      <div class="actions">
+        <a class="btn" href="Tuan4/venha/baitap1.html">Mở bài 1</a>
+        <a class="btn" href="Tuan4/venha/baitap1.html" target="_blank">Mở tab mới</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="badge">Bài 2A</span>
+      <div class="title">Original Hover – Demo 1 (tuỳ chỉnh)</div>
+      <p class="desc">Overlay xanh nhạt trượt trái→phải, zoom mượt, text slide-in.</p>
+      <div class="actions">
+        <a class="btn" href="Tuan4/venha/baitap2a.html">Mở bài 2A</a>
+        <a class="btn" href="Tuan4/venha/baitap2a.html" target="_blank">Mở tab mới</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="badge">Bài 2B</span>
+      <div class="title">Original Hover – Demo 7</div>
+      <p class="desc">Xoay 720°, giữ ảnh nền; chữ & nút cũng xoay đồng bộ.</p>
+      <div class="actions">
+        <a class="btn" href="Tuan4/venha/baitap2b.html">Mở bài 2B</a>
+        <a class="btn" href="Tuan4/venha/baitap2b.html" target="_blank">Mở tab mới</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="badge">Bài 2C</span>
+      <div class="title">Hover tự thiết kế</div>
+      <p class="desc">Viền gradient chạy, ánh sáng quét, 3D tilt + clip-reveal text.</p>
+      <div class="actions">
+        <a class="btn" href="Tuan4/venha/baitap2c.html">Mở bài 2C</a>
+        <a class="btn" href="Tuan4/venha/baitap2c.html" target="_blank">Mở tab mới</a>
+      </div>
+    </article>
+
+    <article class="card">
+      <span class="badge">Bài 3</span>
+      <div class="title">Tổng hợp – Elite Hover</div>
+      <p class="desc">Áp dụng hiệu ứng nâng cao cho toàn bộ gallery (neon border + glass).</p>
+      <div class="actions">
+        <a class="btn" href="Tuan4/venha/baitap3.html">Mở bài 3</a>
+        <a class="btn" href="Tuan4/venha/baitap3.html" target="_blank">Mở tab mới</a>
+      </div>
+    </article>
+  </section>
+</div>
+
+<footer>
+  © 2025 Sinh Quốc Trung • Repo: <a href="https://github.com/<your-github>/Tuan4/tree/main/VeNha" target="_blank">Tuan4/VeNha</a><br>
+  <small>Tips: để đưa lên GitHub Pages, bật Pages cho branch <code>main</code> và trỏ vào thư mục <code>/Tuan4/VeNha</code>.</small>
+</footer>
+
+</body>
+</html>
